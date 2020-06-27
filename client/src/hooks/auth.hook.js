@@ -3,11 +3,11 @@ import {useState, useCallback, useEffect}  from 'react'
 const storageName = 'userData'
 export const useAuth = () => {
     const [ready, setReady] = useState(false)
-    const [token, setToken] = useState(null)
+    const [access_token, setAccessToken] = useState(null)
     const [userId, setUserId] = useState(null)
 
     const login = useCallback((jwtToken,id)=> {
-        setToken(jwtToken)
+        setAccessToken(jwtToken)
         setUserId(id)
          //что такое localStorage?
         localStorage.setItem(storageName,JSON.stringify({
@@ -16,7 +16,7 @@ export const useAuth = () => {
 
 
     const logout = useCallback(()=> {
-        setToken(null)
+        setAccessToken(null)
         setUserId(null)
         localStorage.removeItem(storageName)
     },[])
@@ -29,5 +29,7 @@ export const useAuth = () => {
         }
         setReady(true)
     },[login])
-    return {login, logout, token, userId,ready}
+
+
+    return {login, logout, access_token, userId,ready}
 }
